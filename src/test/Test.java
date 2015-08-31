@@ -1,65 +1,43 @@
-import com.nfwork.dbfound.core.Context;
-import com.nfwork.dbfound.core.Transaction;
-import com.nfwork.dbfound.model.ModelEngine;
+/**  
+ * @Title: Test.java
+ * @Package alibaba
+ * @Des: TODO
+ * @author hesin  
+ * @date 2015年8月28日 下午5:35:26
+ * @version V1.0  
+ */
+package test;
 
+import com.alibaba.openapi.client.AlibabaClient;
+import com.alibaba.openapi.client.policy.ClientPolicy;
+
+/**
+ * @ClassName: Test
+ * @Des: TODO
+ * @author hesin
+ * @date 2015年8月28日 下午5:35:26
+ */
 public class Test {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-//        DBFoundConfig.init("${@projectRoot}/WEB-INF/dbfound-conf.xml");
-//        new Test().save();
-        System.out.println("test");
-    }
+	/**
+	 * @Title: main
+	 * @Des: TODO
+	 * @param args void
+	 * @throws
+	 */
+	public static void main(String[] args) {
+		// 使用自定义的client策略，包括使用域名gw.api.alibaba.com,端口默认为http 80，https 443
+		ClientPolicy policy = new ClientPolicy("gw.api.alibaba.com");
+		// 设置app的appKey以及对应的密钥，信息由注册app时生成
+		policy = policy.setAppKey("3121164").setSigningKey("HFaRcUCO19O");
+		// 使用client策略来初始化AlibabaClient,建议保持单例
+		AlibabaClient client = new AlibabaClient(policy);
+		// 启动AlibabaClient实例
+		client.start();
 
-
-    public void save() {
-
-        Context context = new Context();
-        context.setParamData("user_name", "小杨");
-        context.setParamData("role_id", "6");
-        context.setParamData("password", "123");
-        context.setParamData("status", "Y");
-
-        Transaction transaction = context.getTransaction();
-        try {
-            transaction.begin();
-
-            save1(context);
-            save2(context);
-
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            transaction.rollback();
-        } finally {
-            transaction.end();
-        }
-
-    }
-
-    private void save1(Context context) {
-        context.setParamData("user_name", "小杨");
-        context.setParamData("role_id", "6");
-        context.setParamData("password", "123");
-        context.setParamData("status", "Y");
-
-        ModelEngine.execute(context, "sys/user", "update");
-
-    }
-
-    private void save2(Context context) {
-        context.setParamData("user_name", "小杨8978");
-        context.setParamData("role_id", "6");
-        context.setParamData("password", "123");
-        context.setParamData("status", "Y");
-
-        ModelEngine.execute(context, "sys/user", "update");
-        if (1 == 1) {
-            throw new RuntimeException("hello kity");
-        }
-
-    }
-
+		// 用户通过应用市场来访问app时，会带code参数，app通过这个code来换取用户的授权信息
+		// AuthorizationToken authorizationToken = client.getToken(YOUR_CODE);
+		// 如果已经有用户的授权信息，可以通过已有的refreshToken来换取新的access_token
+		// AuthorizationToken authorizationToken = client.refreshToken(YOUR_REFRESH_TOKEN);
+	}
 }

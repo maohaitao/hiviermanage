@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hiviermanage">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="hiviermanage.war" />
+  </artifact>
+</component>

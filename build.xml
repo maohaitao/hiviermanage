@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="lightapp" default="dist" basedir=".">
+<project name="hiviermanage" default="dist" basedir=".">
     <description>deploy demo</description>
     <!-- set global properties for this build -->
     <property name="source" location="WebRoot"/>
     <property name="dist" location="target"/>
-    <property name="app" value="dbfound"/>
+    <property name="app" value="hiviermanage"/>
 
     <target name="clean" description="clean up">
         <!-- Delete ${dist}/zip directory trees -->
@@ -39,13 +39,13 @@
         <echo message="##########增量复制：  ${dist}/${app} to ${dist}/zip/${app}!"/>
         <copy todir="${dist}/zip/${app}">
             <fileset dir="${source}">
-                <include name="WEB-INF/lib/**/*.*"/>
-                <include name="DBFoundUI/**/*.*"/>
-                <include name="**/*.jsp"/>
-                <include name="**/*.class"/>
-                <include name="**/*.xml"/>
-                <exclude name="**/dbfound-conf.xml"/>
-                <exclude name="**/web.xml"/>
+                <!--<include name="WEB-INF/lib/**/*.*"/>-->
+                <!--<include name="DBFoundUI/**/*.*"/>-->
+                <!--<include name="**/*.jsp"/>-->
+                <!--<include name="**/*.class"/>-->
+                <!--<include name="**/*.xml"/>-->
+                <!--<exclude name="**/dbfound-conf.xml"/>-->
+                <!--<exclude name="**/web.xml"/>-->
             </fileset>
         </copy>
     </target>
